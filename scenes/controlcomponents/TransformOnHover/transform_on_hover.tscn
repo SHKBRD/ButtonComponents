@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://6pm6kujpmdo5"]
+
+[ext_resource type="Script" uid="uid://bebmr4hfbtg01" path="res://scenes/controlcomponents/TransformOnHover/transform_on_hover.gd" id="1_vjef8"]
+
+[node name="TransformOnHover" type="Node" unique_id=868912443]
+script = ExtResource("1_vjef8")
+growTriggerFuncName = Array[String](["on_mouse_entered", "on_focus_entered"])
+shrinkTriggerFuncName = Array[String](["on_mouse_exited", "on_focus_exited"])
+metadata/_custom_type_script = "uid://bs21dy5c2yqfl"
