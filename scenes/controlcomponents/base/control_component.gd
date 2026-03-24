@@ -2,7 +2,6 @@ extends Node
 class_name ControlComponent
 
 @export var buttonParent: Button
-@export_flags("s", "s") var activeOnFlags
 
 func init_existence_checks() -> bool:
 	var tempParent: Node = get_parent()
