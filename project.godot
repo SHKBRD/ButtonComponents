@@ -11,8 +11,13 @@ config_version=5
 [application]
 
 config/name="ButtonComponents"
+run/main_scene="uid://bivsgucjpswo0"
 config/features=PackedStringArray("4.6", "GL Compatibility")
 config/icon="res://icon.svg"
+
+[gui]
+
+theme/default_font_multichannel_signed_distance_field=true
 
 [physics]
 
