@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://6pm6kujpmdo5"]
+
+[ext_resource type="Script" uid="uid://bebmr4hfbtg01" path="res://scenes/controlcomponents/TransformOnSelect/transform_on_select.gd" id="1_w7tmq"]
+
+[node name="TransformOnSelect" type="Node" unique_id=868912443]
+script = ExtResource("1_w7tmq")
+metadata/_custom_type_script = "uid://bs21dy5c2yqfl"
