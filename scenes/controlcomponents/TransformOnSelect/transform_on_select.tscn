@@ -4,4 +4,17 @@
 
 [node name="TransformOnSelect" type="Node" unique_id=868912443]
 script = ExtResource("1_w7tmq")
+trigger = null
+differentiateHoverAndFocus = null
+selectType = null
+affectsCollision = null
+startOffsetPosition = null
+startOffsetRotation = null
+startScale = null
+endOffsetPosition = null
+endOffsetRotation = null
+endScale = null
+tweenEasing = null
+tweenTransition = null
+tweenTime = null
 metadata/_custom_type_script = "uid://bs21dy5c2yqfl"

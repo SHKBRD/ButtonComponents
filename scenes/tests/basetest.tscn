@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://bivsgucjpswo0"]
 
 [ext_resource type="PackedScene" uid="uid://6pm6kujpmdo5" path="res://scenes/controlcomponents/TransformOnSelect/transform_on_select.tscn" id="1_wa3vt"]
+[ext_resource type="PackedScene" uid="uid://dymf18hadl0a4" path="res://scenes/controlcomponents/ControlComponentStack/control_component_stack.tscn" id="2_n6i24"]
 
 [node name="Control" type="Control" unique_id=1546881003]
 layout_mode = 3
@@ -20,13 +21,40 @@ pivot_offset_ratio = Vector2(0.5, 0.5)
 offset_transform_enabled = true
 text = "Retry Button"
 
-[node name="TransformOnSelect" parent="Button" unique_id=868912443 node_paths=PackedStringArray("controlParent") instance=ExtResource("1_wa3vt")]
+[node name="ControlComponentStack" parent="Button" unique_id=2054295040 node_paths=PackedStringArray("assignedParent") instance=ExtResource("2_n6i24")]
+assignedParent = NodePath("..")
+
+[node name="TransformOnSelect" parent="Button/ControlComponentStack" unique_id=868912443 node_paths=PackedStringArray("stack") instance=ExtResource("1_wa3vt")]
+trigger = 1
+differentiateHoverAndFocus = false
+selectType = 0
+affectsCollision = false
+startOffsetPosition = Vector2(0, 0)
+startOffsetRotation = 0.0
+startScale = Vector2(1, 1)
+endOffsetPosition = Vector2(0, 0)
 endOffsetRotation = 45.0
 endScale = Vector2(1.2, 1.2)
 tweenEasing = 1
 tweenTransition = 4
 tweenTime = 0.1
-controlParent = NodePath("..")
+stack = NodePath("..")
+
+[node name="TransformOnSelect2" parent="Button/ControlComponentStack" unique_id=1174816786 node_paths=PackedStringArray("stack") instance=ExtResource("1_wa3vt")]
+trigger = 1
+differentiateHoverAndFocus = false
+selectType = 0
+affectsCollision = false
+startOffsetPosition = Vector2(0, 0)
+startOffsetRotation = 0.0
+startScale = Vector2(1, 1)
+endOffsetPosition = Vector2(0, 0)
+endOffsetRotation = 45.0
+endScale = Vector2(1.2, 1.2)
+tweenEasing = 1
+tweenTransition = 4
+tweenTime = 0.1
+stack = NodePath("..")
 
 [node name="Label" type="Label" parent="." unique_id=79606743]
 layout_mode = 0

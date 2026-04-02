@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://dymf18hadl0a4"]
+
+[ext_resource type="Script" uid="uid://1ouvuxauusc6" path="res://scenes/controlcomponents/ControlComponentStack/control_component_stack.gd" id="1_p3isg"]
+
+[node name="ControlComponentStack" type="Node" unique_id=2054295040]
+script = ExtResource("1_p3isg")

@@ -47,13 +47,12 @@ func _validate_property(property: Dictionary) -> void:
 
 # Called when the node enters the scene tree for the first time.
 func component_ready() -> void:
-	controlParent.offset_transform_enabled = true
+	stack.assignedParent.offset_transform_enabled = true
 
 func update_offset_transform() -> void:
-	pass
-	#controlParent.offset_transform_position = progressPosition
-	#controlParent.offset_transform_rotation = progressRotation
-	#controlParent.offset_transform_scale = progressScale
+	stack.combined_position_offset += progressPosition
+	stack.combined_rotation_offset += progressRotation
+	stack.combined_scale_offset *= progressScale
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func component_process(delta: float) -> void:
@@ -65,9 +64,9 @@ func attempt_enable() -> void:
 	selected = true
 	currentTween = create_tween()
 	currentTween.set_ease(tweenEasing).set_trans(tweenTransition)
-	currentTween.parallel().tween_property(controlParent, "offset_transform_position", endOffsetPosition, tweenTime)
-	currentTween.parallel().tween_property(controlParent, "offset_transform_rotation", deg_to_rad(endOffsetRotation), tweenTime)
-	currentTween.parallel().tween_property(controlParent, "offset_transform_scale", endScale, tweenTime)
+	currentTween.parallel().tween_property(self, "progressPosition", endOffsetPosition, tweenTime)
+	currentTween.parallel().tween_property(self, "progressRotation", deg_to_rad(endOffsetRotation), tweenTime)
+	currentTween.parallel().tween_property(self, "progressScale", endScale, tweenTime)
 
 func attempt_disable() -> void:
 	if not selected:
@@ -75,9 +74,9 @@ func attempt_disable() -> void:
 	selected = false
 	currentTween = create_tween()
 	currentTween.set_ease(tweenEasing).set_trans(tweenTransition)
-	currentTween.parallel().tween_property(controlParent, "offset_transform_position", startOffsetPosition, tweenTime)
-	currentTween.parallel().tween_property(controlParent, "offset_transform_rotation", deg_to_rad(startOffsetRotation), tweenTime)
-	currentTween.parallel().tween_property(controlParent, "offset_transform_scale", startScale, tweenTime)
+	currentTween.parallel().tween_property(self, "progressPosition", startOffsetPosition, tweenTime)
+	currentTween.parallel().tween_property(self, "progressRotation", deg_to_rad(startOffsetRotation), tweenTime)
+	currentTween.parallel().tween_property(self, "progressScale", startScale, tweenTime)
 
 func on_focus_entered() -> void:
 	if trigger==1 and (not differentiateHoverAndFocus or selectType==0):

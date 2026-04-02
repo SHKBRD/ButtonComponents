@@ -1,43 +1,43 @@
 extends Node
 class_name ControlComponent
 
-@export var controlParent: Control
+@export var stack: ControlComponentStack
 
 func init_existence_checks() -> bool:
-	var tempParent: Node = get_parent()
-	if controlParent: tempParent = controlParent
+	var tempStack: Node = get_parent()
+	if stack: tempStack = stack
 	
-	if not tempParent:
+	if not tempStack:
 		assert(false, "%s's target isn't a child of a Control Node!" % name)
-	elif tempParent is not Control:
+	elif tempStack is not ControlComponentStack:
 		assert(false, "%s's target isn't a Control Node!" % name)
 	else:
-		controlParent = tempParent
+		stack = tempStack
 		return true
 	return false
 
 func bind_signals() -> void:
 	# Control
-	if controlParent.has_signal("mouse_entered"):
-		controlParent.mouse_entered.connect(on_mouse_entered)
-	if controlParent.has_signal("mouse_exited"):
-		controlParent.mouse_exited.connect(on_mouse_exited)
-	if controlParent.has_signal("focus_entered"):
-		controlParent.focus_entered.connect(on_focus_entered)
-	if controlParent.has_signal("focus_exited"):
-		controlParent.focus_exited.connect(on_focus_exited)
-	if controlParent.has_signal("gui_input"):
-		controlParent.gui_input.connect(on_gui_input)
+	if stack.assignedParent.has_signal("mouse_entered"):
+		stack.assignedParent.mouse_entered.connect(on_mouse_entered)
+	if stack.assignedParent.has_signal("mouse_exited"):
+		stack.assignedParent.mouse_exited.connect(on_mouse_exited)
+	if stack.assignedParent.has_signal("focus_entered"):
+		stack.assignedParent.focus_entered.connect(on_focus_entered)
+	if stack.assignedParent.has_signal("focus_exited"):
+		stack.assignedParent.focus_exited.connect(on_focus_exited)
+	if stack.assignedParent.has_signal("gui_input"):
+		stack.assignedParent.gui_input.connect(on_gui_input)
 	
 	# Button
-	if controlParent.has_signal("button_down"):
-		controlParent.button_down.connect(on_button_down)
-	if controlParent.has_signal("button_up"):
-		controlParent.button_up.connect(on_button_up)
-	if controlParent.has_signal("pressed"):
-		controlParent.pressed.connect(on_button_pressed)
-	if controlParent.has_signal("toggled"):
-		controlParent.toggled.connect(on_button_toggled)
+	if stack.assignedParent.has_signal("button_down"):
+		stack.assignedParent.button_down.connect(on_button_down)
+	if stack.assignedParent.has_signal("button_up"):
+		stack.assignedParent.button_up.connect(on_button_up)
+	if stack.assignedParent.has_signal("pressed"):
+		stack.assignedParent.pressed.connect(on_button_pressed)
+	if stack.assignedParent.has_signal("toggled"):
+		stack.assignedParent.toggled.connect(on_button_toggled)
 	
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -50,7 +50,8 @@ func component_ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	component_process(delta)
+	pass
+	#component_process(delta)
 
 func component_process(delta: float) -> void:
 	pass
