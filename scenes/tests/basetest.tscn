@@ -24,22 +24,6 @@ text = "Retry Button"
 [node name="ControlComponentStack" parent="Button" unique_id=2054295040 node_paths=PackedStringArray("assignedParent") instance=ExtResource("2_n6i24")]
 assignedParent = NodePath("..")
 
-[node name="TransformOnSelect" parent="Button/ControlComponentStack" unique_id=868912443 node_paths=PackedStringArray("stack") instance=ExtResource("1_wa3vt")]
-trigger = 1
-differentiateHoverAndFocus = false
-selectType = 0
-affectsCollision = false
-startOffsetPosition = Vector2(0, 0)
-startOffsetRotation = 0.0
-startScale = Vector2(1, 1)
-endOffsetPosition = Vector2(0, 0)
-endOffsetRotation = 45.0
-endScale = Vector2(1.2, 1.2)
-tweenEasing = 1
-tweenTransition = 4
-tweenTime = 0.1
-stack = NodePath("..")
-
 [node name="TransformOnSelect2" parent="Button/ControlComponentStack" unique_id=1174816786 node_paths=PackedStringArray("stack") instance=ExtResource("1_wa3vt")]
 trigger = 1
 differentiateHoverAndFocus = false
@@ -49,11 +33,11 @@ startOffsetPosition = Vector2(0, 0)
 startOffsetRotation = 0.0
 startScale = Vector2(1, 1)
 endOffsetPosition = Vector2(0, 0)
-endOffsetRotation = 45.0
-endScale = Vector2(1.2, 1.2)
+endOffsetRotation = 0.0
+endScale = Vector2(1.5, 1.5)
 tweenEasing = 1
-tweenTransition = 4
-tweenTime = 0.1
+tweenTransition = 11
+tweenTime = 0.2
 stack = NodePath("..")
 
 [node name="Label" type="Label" parent="." unique_id=79606743]
