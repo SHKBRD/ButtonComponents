@@ -17,14 +17,16 @@ offset_top = 105.0
 offset_right = 252.0
 offset_bottom = 136.0
 pivot_offset_ratio = Vector2(0.5, 0.5)
+offset_transform_enabled = true
 text = "Retry Button"
 
-[node name="TransformOnSelect" parent="Button" unique_id=868912443 instance=ExtResource("1_wa3vt")]
+[node name="TransformOnSelect" parent="Button" unique_id=868912443 node_paths=PackedStringArray("controlParent") instance=ExtResource("1_wa3vt")]
 endOffsetRotation = 45.0
 endScale = Vector2(1.2, 1.2)
 tweenEasing = 1
 tweenTransition = 4
 tweenTime = 0.1
+controlParent = NodePath("..")
 
 [node name="Label" type="Label" parent="." unique_id=79606743]
 layout_mode = 0

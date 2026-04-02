@@ -1,6 +1,18 @@
+@tool
 extends ControlComponent
 class_name TransformOnHover_CC
 
+@export_enum("On Click:0", "On Select:1") var trigger = 1:
+	set(value):
+		trigger = value
+		notify_property_list_changed()
+@export var differentiateHoverAndFocus: bool = false:
+	set(value):
+		differentiateHoverAndFocus = value
+		notify_property_list_changed()
+@export_enum("On Focus:0", "On Hover:1") var selectType = 0
+
+@export var affectsCollision: bool = false
 @export_group("Start Transform")
 @export var startOffsetPosition: Vector2 = Vector2(0.0, 0.0)
 @export var startOffsetRotation: float = 0.0
@@ -23,15 +35,25 @@ var progressScale: Vector2 = startScale
 var selected: bool = false
 var currentTween: Tween
 
+func _validate_property(property: Dictionary) -> void:
+	match property.name:
+		"differentiateHoverAndFocus":
+			if trigger != 1:
+				property.usage = PROPERTY_USAGE_NO_EDITOR 
+		"selectType":
+			if not differentiateHoverAndFocus:
+				property.usage = PROPERTY_USAGE_NO_EDITOR
+		
+
 # Called when the node enters the scene tree for the first time.
 func component_ready() -> void:
-	pass # Replace with function body.
+	controlParent.offset_transform_enabled = true
 
 func update_offset_transform() -> void:
-	controlParent.global_position = controlParent.global_position + progressPosition
-	#zzz add starting calcs on where the control parent position offs are
-	controlParent.rotation = progressRotation
-	controlParent.scale = progressScale
+	pass
+	#controlParent.offset_transform_position = progressPosition
+	#controlParent.offset_transform_rotation = progressRotation
+	#controlParent.offset_transform_scale = progressScale
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func component_process(delta: float) -> void:
@@ -43,9 +65,9 @@ func attempt_enable() -> void:
 	selected = true
 	currentTween = create_tween()
 	currentTween.set_ease(tweenEasing).set_trans(tweenTransition)
-	currentTween.parallel().tween_property(self, "progressPosition", endOffsetPosition, tweenTime)
-	currentTween.parallel().tween_property(self, "progressRotation", deg_to_rad(endOffsetRotation), tweenTime)
-	currentTween.parallel().tween_property(self, "progressScale", endScale, tweenTime)
+	currentTween.parallel().tween_property(controlParent, "offset_transform_position", endOffsetPosition, tweenTime)
+	currentTween.parallel().tween_property(controlParent, "offset_transform_rotation", deg_to_rad(endOffsetRotation), tweenTime)
+	currentTween.parallel().tween_property(controlParent, "offset_transform_scale", endScale, tweenTime)
 
 func attempt_disable() -> void:
 	if not selected:
@@ -53,18 +75,22 @@ func attempt_disable() -> void:
 	selected = false
 	currentTween = create_tween()
 	currentTween.set_ease(tweenEasing).set_trans(tweenTransition)
-	currentTween.parallel().tween_property(self, "progressPosition", startOffsetPosition, tweenTime)
-	currentTween.parallel().tween_property(self, "progressRotation", deg_to_rad(startOffsetRotation), tweenTime)
-	currentTween.parallel().tween_property(self, "progressScale", startScale, tweenTime)
+	currentTween.parallel().tween_property(controlParent, "offset_transform_position", startOffsetPosition, tweenTime)
+	currentTween.parallel().tween_property(controlParent, "offset_transform_rotation", deg_to_rad(startOffsetRotation), tweenTime)
+	currentTween.parallel().tween_property(controlParent, "offset_transform_scale", startScale, tweenTime)
 
 func on_focus_entered() -> void:
-	attempt_enable()
+	if trigger==1 and (not differentiateHoverAndFocus or selectType==0):
+		attempt_enable()
 
 func on_mouse_entered() -> void:
-	attempt_enable()
+	if trigger==1 and (not differentiateHoverAndFocus or selectType==1):
+		attempt_enable()
 	
 func on_focus_exited() -> void:
-	attempt_disable()
+	if trigger==1 and (not differentiateHoverAndFocus or selectType==0):
+		attempt_disable()
 	
 func on_mouse_exited() -> void:
-	attempt_disable()
+	if trigger==1 and (not differentiateHoverAndFocus or selectType==1):
+		attempt_disable()
